@@ -1,5 +1,7 @@
 {
   "name": "sleepQuality",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

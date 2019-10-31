@@ -1,14 +1,39 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      PSQI Questionnaire
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="DD/MM" [(name)]="day"></ion-datetime>
+  </ion-item>
+  <ion-item>
+      <ion-label>Bed time</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(name)]="bedTime"></ion-datetime>
+  </ion-item>
+  <ion-item>
+      <ion-label>Estimate time before sleeping</ion-label>
+      <ion-input type="number" [(name)]="minutes"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label>Wake up time</ion-label>
+      <ion-datetime displayFormat="HH:mm" [(name)]="wakeUp"></ion-datetime>
+  </ion-item>
+  <ion-item>
+      <ion-label>Woke up how many times</ion-label>
+      <ion-toggle [(name)]="wokeUp"></ion-toggle>
+  </ion-item>
+  <ion-item>
+      <ion-label>Had to go to the bathroom</ion-label>
+      <ion-toggle [(name)]="bathroom"></ion-toggle>
+  </ion-item>
+  <ion-item>
+      <ion-label>Missed alarm</ion-label>
+      <ion-toggle [(name)]="alarm"></ion-toggle>
+  </ion-item>
+  <ion-button>Submit</ion-button>
 </ion-content>
