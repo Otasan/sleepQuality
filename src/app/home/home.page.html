@@ -9,31 +9,31 @@
 <ion-content>
   <ion-item>
       <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="DD/MM" [(name)]="day"></ion-datetime>
+      <ion-datetime displayFormat="DD/MM" [(ngModel)]="day"></ion-datetime>
   </ion-item>
   <ion-item>
       <ion-label>Bed time</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(name)]="bedTime"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="bedTime"></ion-datetime>
   </ion-item>
   <ion-item>
       <ion-label>Estimate time before sleeping</ion-label>
-      <ion-input type="number" [(name)]="minutes"></ion-input>
+      <ion-datetime displayFormat="mm" [(ngModel)]="minutes"></ion-datetime>
   </ion-item>
   <ion-item>
       <ion-label>Wake up time</ion-label>
-      <ion-datetime displayFormat="HH:mm" [(name)]="wakeUp"></ion-datetime>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]="wakeUpTime"></ion-datetime>
   </ion-item>
   <ion-item>
       <ion-label>Woke up how many times</ion-label>
-      <ion-toggle [(name)]="wokeUp"></ion-toggle>
+      <ion-input type="number" [(ngModel)]="wakeUpNumber"></ion-input>
   </ion-item>
   <ion-item>
       <ion-label>Had to go to the bathroom</ion-label>
-      <ion-toggle [(name)]="bathroom"></ion-toggle>
+      <ion-toggle [(ngModel)]="bathroom"></ion-toggle>
   </ion-item>
   <ion-item>
       <ion-label>Missed alarm</ion-label>
-      <ion-toggle [(name)]="alarm"></ion-toggle>
+      <ion-toggle [(ngModel)]="missedAlarm"></ion-toggle>
   </ion-item>
-  <ion-button>Submit</ion-button>
+  <ion-button (click)="submitResult()">Submit</ion-button>
 </ion-content>

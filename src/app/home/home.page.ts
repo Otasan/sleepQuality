@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { PostProvider } from '../../providers/post-provider';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,39 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  day: string = "";
+  bedTime: string = "";
+  minutes: string = "";
+  wakeUpTime: string = "";
+  wakeUpNumber: number = 0;
+  bathroom: boolean = false;
+  missedAlarm: boolean = false;
+  constructor(private postProvider: PostProvider,
+              private toastCtrl:ToastController){}
 
+  submitResult(){
+    return new Promise(resolve => {
+      let day = this.day.substr(0, 10);
+      let bedTime = this.bedTime.substr(0, 16);
+      let minutes = this.minutes.substr(14, 2);
+      let wakeUpTime = this.wakeUpTime.substr(0, 16)
+      let body = {
+        day : day,
+        bedTime: bedTime,
+        minutes: minutes,
+        wakeUpNumber: this.wakeUpNumber,
+        wakeUpTime: wakeUpTime,
+        bathroom: this.bathroom,
+        missedAlarm: this.missedAlarm
+      };
+      console.log(body);
+      this.postProvider.postData(body, 'PSQI.php').subscribe(data =>{
+          this.toastCtrl.create({
+            message: data,
+            duration: 3000,
+            position: 'top'
+          });
+      });
+    });
+  }
 }
