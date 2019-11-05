@@ -34,13 +34,13 @@ export class HomePage {
         bathroom: this.bathroom,
         missedAlarm: this.missedAlarm
       };
-      console.log(body);
-      this.postProvider.postData(body, 'PSQI.php').subscribe(data =>{
-          this.toastCtrl.create({
+      this.postProvider.postData(body, 'PSQI.php').subscribe(async data => {
+          const toast = await this.toastCtrl.create({
             message: data,
             duration: 3000,
             position: 'top'
           });
+          toast.present();
       });
     });
   }
