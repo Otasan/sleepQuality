@@ -13,6 +13,7 @@ import { ToastController } from '@ionic/angular';
 
 import { HttpModule } from '@angular/http';
 import { PostProvider } from '../providers/post-provider';
+import { BluetoothSerial } from '@ionic-native/bluetooth-serial/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { PostProvider } from '../providers/post-provider';
     StatusBar,
     PostProvider,
     SplashScreen,
+    BluetoothSerial,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
