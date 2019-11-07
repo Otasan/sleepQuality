@@ -5,11 +5,27 @@
 </ion-header>
 
 <ion-content>
-  <ion-button (click)="getLastFile()">Get last file</ion-button>
+  <ion-button full (click)="listPairedDevices()">
+    <ion-icon name="refresh"></ion-icon>&nbsp;Refresh Bluetooth Devices
+  </ion-button>
+  <ion-row>
+    <ion-col>
+      <ion-list radio-group [(ngModel)]="pairedDevicesID" *ngIf="listToggle">
+        <ion-item *ngFor="let i of pairedList;let j=index">
+          <ion-label>{{ i.name }}</ion-label>
+          <ion-radio value="({j})"></ion-radio>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-button full *ngIf="listToggle" (click)="selectDevice()">
+    <ion-icon name="bluetooth"></ion-icon>&nbsp;Connect Bluetooth Device
+  </ion-button>
+  <ion-button full (click)="getLastFile()">Get last file</ion-button>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <a routerLink="../home"><ion-icon name="home"></ion-icon></a>
+    <ion-button routerLink="../home"><ion-icon name="home"></ion-icon></ion-button>
   </ion-toolbar>
 </ion-footer>
