@@ -69,9 +69,10 @@ export class PushBluetoothPage implements OnInit {
   }
 
   getLastFile() {
-    this.bluetoothSerial.write("get_previous\n").then(success =>{
-      this.bluetoothSerial.read().then(success =>{
-        this.showToast(success);
+    this.bluetoothSerial.write("get\n").then(success =>{
+      this.bluetoothSerial.readUntil('\n').then(success =>{
+        this.uploadRecords(success);
+
       }, error =>{
         this.showToast(error);
       });
@@ -87,12 +88,29 @@ export class PushBluetoothPage implements OnInit {
         g: 10,
         b: 15,
         c: 12,
-        temps: "2019-11-05"
+        temps: "2019-11-05 11:55:20"
       };
       this.postProvider.postData(body, "RecordLight.php").subscribe(data => {
         this.showToast(data);
       });
     });*/
+  }
+
+  uploadRecords(rec:string){
+    console.log(rec);
+    let data:bluetoothReturn;
+    data=JSON.parse(rec);
+    console.log(data.file);
+    if(data.type === "file"){
+      for(let r in data.data){
+        this.postProvider.postData(r, "RecordLight.php").subscribe(done =>{
+          this.showToast(done);
+        });
+      }
+    }
+    else{
+      this.showToast(data.data);
+    }
   }
 
   async showToast(data){
@@ -110,4 +128,18 @@ interface pairedList{
   "id": string,
   "address": string,
   "name": string
+}
+
+interface lightRecord{
+  "r":number,
+  "g":number,
+  "b":number,
+  "c":number,
+  "time":string
+}
+
+interface bluetoothReturn{
+  "type":string,
+  "file":string,
+  "data":lightRecord[]
 }
