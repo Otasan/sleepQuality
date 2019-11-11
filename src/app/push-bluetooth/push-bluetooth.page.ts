@@ -35,7 +35,7 @@ export class PushBluetoothPage implements OnInit {
     this.bluetoothSerial.list().then(success =>{
       this.pairedList = success;
       this.listToggle = true;
-    })
+    });
   }
 
   selectDevice(){
@@ -79,34 +79,17 @@ export class PushBluetoothPage implements OnInit {
     }, error =>{
       this.showToast(error);
     });
-
-    /*return new Promise(resolve => {
-      
-      //TODO: Connect to bluetooth and pull data
-      let body = {
-        r: 10,
-        g: 10,
-        b: 15,
-        c: 12,
-        temps: "2019-11-05 11:55:20"
-      };
-      this.postProvider.postData(body, "RecordLight.php").subscribe(data => {
-        this.showToast(data);
-      });
-    });*/
   }
 
   uploadRecords(rec:string){
-    console.log(rec);
     let data:bluetoothReturn;
     data=JSON.parse(rec);
-    console.log(data.file);
     if(data.type === "file"){
-      for(let r in data.data){
+      data.data.forEach(r=>{
         this.postProvider.postData(r, "RecordLight.php").subscribe(done =>{
           this.showToast(done);
         });
-      }
+      });
     }
     else{
       this.showToast(data.data);
@@ -121,6 +104,11 @@ export class PushBluetoothPage implements OnInit {
     });
     toast.present();
   }
+
+  /*dummyPayload(){
+    let rec = '{"type":"file","file":"dummy.txt","data":[{"r":"99","g":"99","b":"99","c":"99","time":"2019-11-05 11:55:20"},{"r":"99","g":"99","b":"99","c":"99","time":"2019-11-05 12:00:20"}]}';
+    this.uploadRecords(rec);
+  }*/
 
 }
 interface pairedList{
